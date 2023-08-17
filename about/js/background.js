@@ -12,7 +12,9 @@ $(document).ready(() => {
 
 
     shaderWebBackground.shade({
+        canvas:document.getElementById("imagec"),
         onInit: (ctx) => {
+
             // screen center
             mouseX = ctx.cssWidth / 2;
 
@@ -28,12 +30,14 @@ $(document).ready(() => {
             image: {
                 uniforms: {
                     mouse: (gl, loc) => gl.uniform2f(loc, shaderMouseX, shaderMouseY),
-                    resolution: (gl, loc) => gl.uniform2f(loc,window.screen.height ,window.screen.width ),
+                    resolution: (gl, loc) => gl.uniform2f(loc,window.screen.width ,window.screen.height ),
                     time: (gl, loc) => gl.uniform1f(loc, performance.now() / 1000),
                     //bb: (gl, loc, ctx) => ctx.texture(loc, ctx.iWebCam)
                 }
             }
         }
     });
+
+
 
 })

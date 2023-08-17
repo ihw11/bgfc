@@ -10,6 +10,11 @@ body, html {
     background: url("https://placekitten.com/666/666") fixed center;
 }
 
+.bg-canvas {
+    background-color: #000;
+    display: inherit ;
+}
+
 
 
 
