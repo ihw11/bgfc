@@ -45,7 +45,7 @@ $(document).ready(() => {
     }
     else{
         let canvas= document.getElementById("imagec").getContext("2d")
-        canvas.fillStyle ="#040289"
+        canvas.fillStyle ="rgb(4,2,137)"
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     }
