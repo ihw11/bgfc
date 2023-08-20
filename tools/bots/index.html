@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>BGFC - tools</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <script src="js/jquery.js"></script>
+    <script src="js/js.cookie.min.js"></script>
+    <script src="js/index.js"></script>
+
+
+</head>
+<body>
+
+    <b id="errbox"></b>
+
+    <dialog id ="popupLogin">
+        <label>ID:</label>
+        <input id="login">
+        <br>
+        <label>PASSWORD:</label>
+        <input id="password" type="password">
+        <br>
+        <label>CAPTCHA:</label>
+        <img id ="capframe" src="" ><img>
+        <input id="capval" type="text">
+        <br>
+
+        <button onclick="onClickLogin()">sell my account</button>
+
+    </dialog>
+    <main>
+        <header>
+
+
+        </header>
+        <textarea class="scrollabletextbox" name="Logs from remover" id="log" class="log">
+
+        </textarea>
+    </main>
+
+
+</body>
+</html>

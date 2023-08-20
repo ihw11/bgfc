@@ -1,13 +1,5 @@
 $(document).ready(() => {
-    var mouseX;
-    var mouseY;
 
-    document.addEventListener("mousemove", (event) => {
-        mouseX = event.clientX;
-        mouseY = event.clientY;
-    });
-    var shaderMouseX;
-    var shaderMouseY;
     var isMobile = false; //initiate as false
 
     if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)
@@ -18,23 +10,10 @@ $(document).ready(() => {
     if (!isMobile) {
         shaderWebBackground.shade({
             canvas: document.getElementById("imagec"),
-            onInit: (ctx) => {
 
-                // screen center
-                mouseX = ctx.cssWidth / 2;
-
-                mouseY = ctx.cssHeight / 2;
-
-
-            },
-            onBeforeFrame: (ctx) => {
-                shaderMouseX = ctx.toShaderX(mouseX);
-                shaderMouseY = ctx.toShaderY(mouseY);
-            },
             shaders: {
                 image: {
                     uniforms: {
-                        mouse: (gl, loc) => gl.uniform2f(loc, shaderMouseX, shaderMouseY),
                         resolution: (gl, loc) => gl.uniform2f(loc, window.screen.width, window.screen.height),
                         time: (gl, loc) => gl.uniform1f(loc, performance.now() / 1000),
                         //bb: (gl, loc, ctx) => ctx.texture(loc, ctx.iWebCam)

@@ -1,0 +1,24 @@
+#popupLogin{
+    border: #6750A4 solid;
+    border-radius: 5px;
+    background-color: #FFFBFE;
+    display: grid;
+    text-align: center;
+
+}
+#popupLogin input{
+    border: #6750A4 solid;
+    border-radius: 6em;
+}
+#popupLogin img {
+    display: flex;
+    margin: 0 auto;
+}
+#log{
+    position: absolute;
+    left:40%;
+    right: 40%;
+    top:20%;
+    bottom: 20%;
+}
+
