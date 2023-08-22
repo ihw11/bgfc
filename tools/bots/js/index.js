@@ -5,7 +5,14 @@ $(document).ready(()=>{
     if (myParam) {
         $("errbox").val(myParam)
     }
-    if (!checkToken()){
+    let ss = checkToken()
+    let code = 0;
+    ss.done((resp)=>{
+        code = resp.code
+
+    })
+    if (code !== 1 ){
+        console.log("token invalid")
         Cookies.remove("token")
     }
     console.log(Cookies.get("token")=== undefined)
@@ -31,25 +38,32 @@ $(document).ready(()=>{
             }
         }).then(()=>{
             let ids = lines.split("\n")
-            setInterval(ebalrot,500,ids)
+
+            let UserFriends = getFriends()
+            for (let userFriend in UserFriends) {
+                if (ids.includes(UserFriends[userFriend].toString())){
+                    setTimeout(ebalrot,500,UserFriends[userFriend])
+                }
+
+            }
+
+
 
         });
     }
     let lines =""
-    function ebalrot(ids){
-        let  id  = ids.pop()
-        $.ajax({
+    function ebalrot(id){
+
+        let dat = $.ajax({
             url: `http://modsgs.sandboxol.com/friend/api/v1/friends?friendId=${id}`,
             headers: {
                 "Access-Token": Cookies.get("token"),
                 "userid": Cookies.get("id")
             },
             type: 'DELETE',
-            success: function(result) {
-                document.getElementById("log").append(result)
-
-            }
-        });
+            async: false
+        }).responseText
+        document.getElementById("log").append(dat+"\n")
     }
 
 
@@ -58,12 +72,47 @@ $(document).ready(()=>{
 
 
 })
+function getFriends() {
+    let resp = $.ajax({
+        url: 'https://www.blockmango.com/cubo-api/friend/api/v1/friends',
+        crossDomain: true,
+        headers: {
+            'accept': 'application/json, text/plain, */*',
+            'accept-language': 'ru,en;q=0.9,en-GB;q=0.8,en-US;q=0.7',
+            'access-token': Cookies.get("token"),
+            'cache-control': 'no-cache',
+            'language': 'ru_RU',
+            'os_platform': 'web',
+            'pragma': 'no-cache',
+            'userid': Cookies.get("id")
+        },
+        data: {
+            'pageSize': '500',
+            'pageNo': '0'
+        },
+        dataType: 'json',
+        async:false,
+
+    }).responseJSON.data.data;
+
+    let ids = []
+
+    for (let respKey in resp) {
+
+
+       ids.push(resp[respKey].userId)
+    }
+
+    return ids
+
+}
 function checkToken(){
-    let success = false
-    $.ajax({
+
+    return $.ajax({
         url: 'https://www.blockmango.com/cubo-api/user/api/v1/user/details/info',
         crossDomain: true,
         method: 'post',
+        async: false,
         headers: {
 
             'access-token': Cookies.get("token"),
@@ -90,12 +139,8 @@ function checkToken(){
         contentType: 'application/json;charset=UTF-8',
         dataType: 'json',
         data: JSON.stringify({})
-    }).done(function(response) {
-        if (response.code ===1){
-            success=true
-        }
     })
-    return success;
+
 }
 function onClickLogin() {
     const  login = document.getElementById("login").value

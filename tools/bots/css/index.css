@@ -14,8 +14,15 @@
     display: flex;
     margin: 0 auto;
 }
-#log{
-    position: absolute;
+.logLabel{
+    position: fixed;
+    left:40%;
+    right: 40%;
+    top:15%;
+
+}
+.log{
+    position: fixed;
     left:40%;
     right: 40%;
     top:20%;
