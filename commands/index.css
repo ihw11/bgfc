@@ -1,0 +1,17 @@
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:20%; /* you can use % */
+    height: auto;
+}
+h3{
+    text-align: center;
+}
+p{text-align: center}
+.bebra{
+    display: inline-grid;
+    margin-left:auto;
+    margin-right: auto;
+
+}
